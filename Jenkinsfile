@@ -16,6 +16,7 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
+        // menambah stage Manual Approval
         stage('Manual Approval') { 
             steps {
                 timeout(time: 7, unit: 'DAYS') {

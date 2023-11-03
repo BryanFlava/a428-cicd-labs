@@ -1,19 +1,25 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:16-buster-slim'
-            args '-p 3000:3000'
-        }
-    }
+    agent any
+    
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                sh 'npm install'
+                // Mengambil kode sumber dari repository Git
+                checkout scm
             }
         }
-        stage('Test') { 
+        
+        stage('Build') {
             steps {
-                sh './jenkins/scripts/test.sh' 
+                // Menjalankan skrip Python
+                sh 'python -V' // Menampilkan versi Python
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                // Menjalankan skrip Python untuk pengujian
+                sh 'python -c "print(\'Hello, Jenkins!\')"'
             }
         }
     }

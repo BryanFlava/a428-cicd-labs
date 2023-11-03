@@ -20,7 +20,6 @@ pipeline {
     steps {
         sh './jenkins/scripts/deliver.sh'
         input message: 'Sudah selesai ? (Klik "Proceed" untuk mengakhiri)'
-        sh 'sleep 60'  // Menjeda eksekusi selama 1 menit dan menunggu
         sh './jenkins/scripts/kill.sh'
     }
 }

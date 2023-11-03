@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('Checkout') {
             steps {
@@ -8,17 +8,17 @@ pipeline {
                 checkout scm
             }
         }
-        
+
         stage('Build') {
             steps {
-                // Menjalankan skrip Python
-                sh 'python -V' // Menampilkan versi Python
+                // Menampilkan versi Python
+                sh 'python -V'
             }
         }
-        
+
         stage('Test') {
             steps {
-                // Menjalankan skrip Python untuk pengujian
+                // Menjalankan skrip Python sederhana
                 sh 'python -c "print(\'Hello, Jenkins!\')"'
             }
         }

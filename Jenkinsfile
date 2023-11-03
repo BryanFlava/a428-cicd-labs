@@ -16,12 +16,14 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-        stage('Deploy') { 
-            steps {
-                sh './jenkins/scripts/deliver.sh' 
-                input message: 'Sudah selesai ? (Klik "Proceed" untuk mengakhiri)' 
-                sh './jenkins/scripts/kill.sh' 
-            }
-        }
+        stage('Deploy') {
+    steps {
+        sh './jenkins/scripts/deliver.sh'
+        input message: 'Sudah selesai ? (Klik "Proceed" untuk mengakhiri)'
+        sh 'sleep 60'  // Menjeda eksekusi selama 1 menit
+        sh './jenkins/scripts/kill.sh'
+    }
+}
+
     }
 }

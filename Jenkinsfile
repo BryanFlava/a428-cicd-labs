@@ -16,13 +16,19 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-        stage('Deploy') {
-    steps {
-        sh './jenkins/scripts/deliver.sh'
-        input message: 'Sudah selesai ? (Klik "Proceed" untuk mengakhiri)'
-        sh './jenkins/scripts/kill.sh'
-    }
-}
-
+        stage('Manual Approval') { 
+            steps {
+                timeout(time: 7, unit: 'DAYS') {
+                    input message: 'Apakah sudah siap untuk dilanjutkan? (Klik "Proceed" untuk melanjutkan)'
+                }
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                sh './jenkins/scripts/deliver.sh'
+                sh 'sleep 60'  // Menjeda eksekusi selama 1 menit
+                sh './jenkins/scripts/kill.sh'
+            }
+        }
     }
 }
